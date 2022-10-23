@@ -78,7 +78,7 @@ Bitmap BitmapProc::decodeImage(const BarchData &barch)
     int lastEncodedRowIndex = 0;
     for(size_t row = 0; row < barch.emptyRows.size(); row++)
     {
-        // 1. For empty strings - fill data array with 0xff pixels
+        // 1. For empty rows - fill data array with 0xff pixels
         if(barch.emptyRows.at(row))
         {
             int count = 0;
@@ -91,13 +91,13 @@ Bitmap BitmapProc::decodeImage(const BarchData &barch)
         }
         else
         {
-            // 2. For non empty strings - encode
+            // 2. For non empty rows - encode row data row by row
             auto offsetBegin = barch.encodedRowSizes.begin();
             auto offsetEnd = offsetBegin + lastEncodedRowIndex;
-            u_int32_t offset = std::accumulate(offsetBegin, offsetEnd, 0);
+            u_int32_t offset = std::accumulate(offsetBegin, offsetEnd, 0); // get start position in encoded data array
 
-            auto rowBegin = barch.encodedData.begin() + offset;
-            auto rowEnd = rowBegin + barch.encodedRowSizes.at(lastEncodedRowIndex);
+            auto rowBegin = barch.encodedData.begin() + offset; // start pos
+            auto rowEnd = rowBegin + barch.encodedRowSizes.at(lastEncodedRowIndex); // start pos + encoded row length
             std::vector<unsigned char> encodedRow(rowBegin, rowEnd);
 
             for(size_t index = 0; index < encodedRow.size();)
@@ -140,7 +140,7 @@ Bitmap BitmapProc::decodeImage(const BarchData &barch)
                         index++;
                         if(index >= encodedRow.size())
                         {
-                            break;
+                            break; // for image width % 4 != 0
                         }
                     }
                 }

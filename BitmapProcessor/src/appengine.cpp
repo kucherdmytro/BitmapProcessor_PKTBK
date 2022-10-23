@@ -68,7 +68,6 @@ void AppEngine::slot_handleBarchData(const BarchData &barch)
 void AppEngine::slot_handleBitmapData(const Bitmap &bitmap)
 {
     QMutex mutex;
-
     mutex.lock();
     QString bmpImagePath(m_fileInfo.path() + "/" + m_fileInfo.baseName().remove("_packed") + "_unpacked.bmp");
     QImage image(bitmap.data, bitmap.width, bitmap.height, bitmap.width, QImage::Format_Grayscale8);
