@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/">
+        <file>src/gui/main.qml</file>
+        <file>src/gui/misc/PushButton.qml</file>
+        <file>src/gui/delegates/FileListDelegate.qml</file>
+        <file>src/gui/misc/Popup.qml</file>
+    </qresource>
+</RCC>
