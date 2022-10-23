@@ -20,11 +20,15 @@ void AppEngine::processImage(const QFileInfo &info)
     {
         if(m_fileInfo.suffix() == "bmp")
         {
+            QMetaEnum metaEnum = QMetaEnum::fromType<QImage::Format>();
             QImage image(m_fileInfo.filePath());
             if(image.format() != QImage::Format_Grayscale8)
             {
-                emit wrongFormat("Warning! Image not in grayscale 8-bit format. \n"
-                                 "It will be converted to grayscale 8-bit format...");
+                QString reason = QString("Warning!\n"
+                                         "Image not in grayscale 8-bit format.\n"
+                                         "Selected image format is %0\n"
+                                         "It will be converted to grayscale 8-bit format and packed");
+                emit wrongFormat(reason.arg(metaEnum.valueToKey(image.format())));
             }
         }
         ImageProcessor *processor = new ImageProcessor(info, this);

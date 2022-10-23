@@ -9,8 +9,8 @@ import "delegates"
 
 Window {
     id: _root
-    width: 600
-    height: 800
+    width: 700
+    height: 900
     visible: true
     title: qsTr("Bitmap processor")
 //-----------------------------------------------------------------------------------
